@@ -9,8 +9,9 @@ import AuthRouter from './Router/AuthRouter.js'
 dotenv.config();
 
 
+//mongodb+srv://razalp0012300:CsHcj8rrlJ28wToL@cluster0.pikhe2s.mongodb.net/
 const app=express()
-mongoose.connect('mongodb+srv://razalp0012300:CsHcj8rrlJ28wToL@cluster0.pikhe2s.mongodb.net/').then(()=>{
+mongoose.connect('mongodb://127.0.0.1:27017/authapp').then(()=>{
     console.log('mongoconnected')
 }).catch(()=>{
     console.log('not connected')
