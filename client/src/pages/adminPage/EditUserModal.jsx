@@ -40,6 +40,17 @@ const EditUserModal = ({ user, onSave, onClose }) => {
           onChange={handleInputChange}
         />
 
+        <label htmlFor="isAdmin">Role:</label>
+        <select
+          id="isAdmin"
+          name="isAdmin"
+          value={updatedUserData.isAdmin}
+          onChange={handleInputChange}
+        >
+          <option value={false}>User</option>
+          <option value={true}>Admin</option>
+        </select>
+
         <div className="button-container">
           <button className="save-button" onClick={handleSave}>
             Save
