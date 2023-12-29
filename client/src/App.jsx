@@ -6,7 +6,7 @@ import SignUp from './pages/SignUp';
 import Profile from './pages/Profile';
 import Header from './components/Header';
 import PrivateRoute from './components/PrivateRoute';
-import Admin from '../adminPage/Admin';
+import Admin from './pages/adminPage/Admin';
 
 export default function App() {
   return (

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-
+import './EditUserModal.css'
 const EditUserModal = ({ user, onSave, onClose }) => {
   const [updatedUserData, setUpdatedUserData] = useState({
     ...user,
@@ -18,8 +18,10 @@ const EditUserModal = ({ user, onSave, onClose }) => {
   };
 
   return (
-    <div className="modal">
-      <div className="modal-content">
+    <div className="modal-overlay">
+      <div className="edit-user-modal">
+        <h2>Edit User</h2>
+
         <label htmlFor="username">Username:</label>
         <input
           type="text"
@@ -28,7 +30,7 @@ const EditUserModal = ({ user, onSave, onClose }) => {
           value={updatedUserData.username}
           onChange={handleInputChange}
         />
-        
+
         <label htmlFor="email">Email:</label>
         <input
           type="text"
@@ -38,14 +40,18 @@ const EditUserModal = ({ user, onSave, onClose }) => {
           onChange={handleInputChange}
         />
 
-       
-
-
-        <button onClick={handleSave}>Save</button>
-        <button onClick={onClose}>Cancel</button>
+        <div className="button-container">
+          <button className="save-button" onClick={handleSave}>
+            Save
+          </button>
+          <button className="cancel-button" onClick={onClose}>
+            Cancel
+          </button>
+        </div>
       </div>
     </div>
   );
 };
 
 export default EditUserModal;
+

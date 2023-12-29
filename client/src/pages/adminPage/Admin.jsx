@@ -9,14 +9,14 @@ const Admin = () => {
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [editingUserId, setEditingUserId] = useState(null);
   const [searchQuery, setSearchQuery] = useState('');
-  const navigate=useNavigate()
+  const navigate = useNavigate()
 
   const { currentUser } = useSelector((state) => state.user);
-  useEffect(()=>{
-    if(!currentUser?.isAdmin){
+  useEffect(() => {
+    if (!currentUser?.isAdmin) {
       navigate('/')
     }
-  },[])
+  }, [])
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -60,6 +60,15 @@ const Admin = () => {
       console.error('Error deleting user:', error);
     }
   };
+
+  const confirmDeleteUser = (userId) => {
+    const userConfirmed = window.confirm('Are you sure you want to delete this user?');
+
+    if (userConfirmed) {
+      handleDeleteUser(userId);
+    }
+  };
+
 
   const handleEditUser = (userId) => {
     setIsEditModalOpen(true);
@@ -111,62 +120,58 @@ const Admin = () => {
   };
 
   return (
-    <>
-    
-
-
     <div className="min-h-screen flex items-center justify-center">
-        <div className="shadow-md rounded-lg overflow-hidden w-full">
-          <div className="p-4">
-            <input
-              type="text"
-              placeholder="Search by user name"
-              value={searchQuery}
-              onChange={handleSearch}
-              className="p-2 border rounded w-full"
-            />
-          </div>
-          <div className="overflow-x-auto">
-            <table className="w-full">
-              <thead>
-                <tr>
-                  <th className="py-2 px-4 border">SI No</th>
-                  <th className="py-2 px-4 border">User name</th>
-                  <th className="py-2 px-4 border">Image</th>
-                  <th className="py-2 px-4 border">Email</th>
-                  <th className="py-2 px-4 border">Role</th>
-                  <th className="py-2 px-4 border">Actions</th>
+      <div className="shadow-md rounded-lg overflow-hidden w-full">
+        <div className="p-4">
+          <input
+            type="text"
+            placeholder="Search by username"
+            value={searchQuery}
+            onChange={handleSearch}
+            className="p-2 border rounded  focus:outline-none focus:ring focus:border-blue-300"
+          />
+        </div>
+        <div className="overflow-x-auto">
+          <table className="w-full table-auto">
+            <thead>
+              <tr className="bg-gray-200">
+                <th className="py-2 px-4 border">#</th>
+                <th className="py-2 px-4 border">Username</th>
+                <th className="py-2 px-4 border">Image</th>
+                <th className="py-2 px-4 border">Email</th>
+                <th className="py-2 px-4 border">Role</th>
+                <th className="py-2 px-4 border">Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              {filteredUsers.map((user, index) => (
+                <tr key={user._id} className={index % 2 === 0 ? 'bg-gray-100' : ''}>
+                  <td className="py-2 px-4 border">{index + 1}</td>
+                  <td className="py-2 px-4 border">{user.username}</td>
+                  <td className="py-2 px-4 border ">
+                    <img
+                      src={user.profilePicture}
+                      alt={`${user.username}'s Profile`}
+                      className="w-full h-full rounded-full border"
+                      style={{ maxWidth: '50px', maxHeight: '50px', objectFit: 'cover' }}
+                    />
+                  </td>
+                  <td className="py-2 px-4 border">{user.email}</td>
+                  <td className="py-2 px-4 border">{user.isAdmin ? 'Admin' : 'User'}</td>
+                  <td className="py-2 px-4 border flex flex-col w-20">
+                    <button className="py-2 px-4 bg-red-800 text-white font-semibold rounded-lg shadow-md hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75 w-20" onClick={() => confirmDeleteUser(user._id)}>
+                      Delete
+                    </button>
+
+                    <br />
+                    <button className="py-2 px-4 bg-blue-500 text-white font-semibold rounded-lg shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75 w-20" onClick={() => handleEditUser(user._id)}>
+                      Edit
+                    </button>
+                  </td>
                 </tr>
-              </thead>
-              <tbody>
-                {filteredUsers.map((user, index) => (
-                  <tr key={user._id}>
-                    <td className="py-2 px-4 border">{index + 1}</td>
-                    <td className="py-2 px-4 border">{user.username}</td>
-                    <td className="py-2 px-4 border" style={{ maxWidth: '50px' }}>
-                      <img
-                        src={user.profilePicture}
-                        alt={`${user.username}'s Profile`}
-                        className="w-full h-full rounded-full border"
-                        style={{ maxWidth: '50px', maxHeight: '50px', objectFit: 'cover' }}
-                      />
-                    </td>
-                    <td className="py-2 px-4 border">{user.email}</td>
-                    <td className="py-2 px-4 border">{user.isAdmin ? 'Admin' : 'User'}</td>
-                    <td className="py-2 px-4 border">
-                      <button className="bg-red-700" onClick={() => handleDeleteUser(user._id)}>
-                        Delete
-                      </button>
-                      <br />
-                      <button className="bg-green-500" onClick={() => handleEditUser(user._id)}>
-                        Edit
-                      </button>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
+              ))}
+            </tbody>
+          </table>
         </div>
       </div>
 
@@ -177,7 +182,7 @@ const Admin = () => {
           onClose={handleCancelEdit}
         />
       )}
-    </>
+    </div>
   );
 };
 
