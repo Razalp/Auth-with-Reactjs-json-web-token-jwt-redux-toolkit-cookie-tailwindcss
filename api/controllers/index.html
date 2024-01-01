@@ -1,0 +1,15 @@
+<ul class="myList">
+    <li>LIST</li>
+    <li>LIST 2</li>
+    <li>LIST 3</li>
+</ul>
+
+<script>
+document.getElementsByClassName('myList').addEventListner('click',
+function(events){
+    if(events.target.tagName==='LI'){
+        console.log('click on item' ,events.target.textContent)
+    }
+})
+
+</script>
