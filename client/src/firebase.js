@@ -2,7 +2,7 @@
 import { initializeApp } from 'firebase/app';
 import { getStorage } from 'firebase/storage';
 
-// Your web app's Firebase configuration
+
 const firebaseConfig = {
   apiKey: "AIzaSyCe4I7dr5VVpQfICYobXo-ftAxezjG4rCQ",
   authDomain: "authapp-e43ff.firebaseapp.com",
@@ -12,5 +12,4 @@ const firebaseConfig = {
   appId: "1:526562077732:web:2998455f66486e4f19fcb1"
 };
 
-// Initialize Firebase
 export const app = initializeApp(firebaseConfig);
