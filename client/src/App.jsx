@@ -11,7 +11,7 @@ import Admin from './pages/adminPage/Admin';
 export default function App() {
   return (
     <BrowserRouter>
-      {/* header */}
+
       <Header />
       <Routes>
         <Route path='/' element={<Home />} />
