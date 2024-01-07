@@ -8,7 +8,7 @@ export const test = (req, res) => {
   });
 };
 
-// update user
+
 
 export const updateUser = async (req, res, next) => {
   // if (req.user.id !== req.params.id) {
@@ -39,7 +39,6 @@ export const updateUser = async (req, res, next) => {
 };
 
 
-// delete user
 
 
 export const deleteUser = async (req, res, next) => {
