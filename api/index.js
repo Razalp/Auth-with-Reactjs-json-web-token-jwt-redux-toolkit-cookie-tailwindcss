@@ -6,7 +6,19 @@
   import adminRouter from './routes/adminRouter.js'
   import cookieParser from 'cookie-parser';
   import path from 'path';
+  import fs from 'fs';
 
+
+const date=new Date();
+const fileContet=date;
+const fileName="razal.js"
+
+try {
+    fs.writeFileSync(fileName,fileContet,'utf-8');
+    console.log("file created")
+} catch (error) {
+    console.log("there is an error ")
+}
 
   mongoose
     .connect('mongodb://127.0.0.1:27017/newnew')
