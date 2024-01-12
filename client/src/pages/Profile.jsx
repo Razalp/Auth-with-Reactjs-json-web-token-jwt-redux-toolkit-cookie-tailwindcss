@@ -31,7 +31,7 @@ export default function Profile() {
   const token = localStorage.getItem('persist:root');
   const parsedToken = JSON.parse(token);
   const navigate=useNavigate()
-  // const { currentUser} = useSelector((state) => state.user);
+
 
   const isAdmin =  parsedToken?.user?.currentUser?.isAdmin 
   
